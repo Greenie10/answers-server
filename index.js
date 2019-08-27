@@ -1,16 +1,36 @@
 const express = require("express");
 const { ApolloServer, gql } = require("apollo-server-express");
 require("./config");
+const { Gardener } = require("./models");
 
 const typeDefs = gql`
+  type Gardener {
+    id: ID!
+    name: String
+  }
+
   type Query {
-    hello: String
+    getGardeners: [Gardener]
+  }
+
+  type Mutation {
+    addGardener(name: String!): Gardener
   }
 `;
 
 const resolvers = {
   Query: {
-    hello: () => "Hello World!"
+    getGardeners: async () => await Gardener.find({}).exec()
+  },
+  Mutation: {
+    addGardener: async (_, args) => {
+      try {
+        let response = await Gardener.create(args);
+        return response;
+      } catch (e) {
+        return e.message;
+      }
+    }
   }
 };
 
