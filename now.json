@@ -1,0 +1,5 @@
+{
+  "name": "answers-server",
+  "version": 2,
+  "builds": [{ "src": "*.js", "use": "@now/node" }]
+}
