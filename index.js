@@ -34,7 +34,11 @@ const resolvers = {
   }
 };
 
-const server = new ApolloServer({ cors: true, typeDefs, resolvers });
+const server = new ApolloServer({
+  cors: { origin: "*", credentials: true },
+  typeDefs,
+  resolvers
+});
 const app = express();
 server.applyMiddleware({ app });
 
