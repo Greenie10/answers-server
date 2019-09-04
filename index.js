@@ -15,7 +15,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addGardener(gardenerName: String!): Gardener
+    addGardener(name: String!): Gardener
   }
 `;
 
