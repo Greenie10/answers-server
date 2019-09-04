@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 require("dotenv").config({ path: "./.env" });
 mongoose.Promise = global.Promise;
 
-const url = process.env.MONGODB_URI_GARDENERS;
+const url = process.env.MONGODB_URL;
 
 mongoose.connect(url, { useNewUrlParser: true });
 mongoose.connection.once("open", () =>
