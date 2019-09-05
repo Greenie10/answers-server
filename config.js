@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 require("dotenv").config({ path: "./.env" });
 mongoose.Promise = global.Promise;
 
-const url = process.env.MONGODB_GQT;
-console.log("TCL: url", url)
+// const url = process.env.MONGODB_GQT;
+console.log("TCL: url", url);
 
-mongoose.connect(url, { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_GQT, { useNewUrlParser: true });
 mongoose.connection.once("open", () =>
-  console.log(`Connected to mongo at ${url}`)
+  console.log(`Connected to mongo at Lolly's Cluster`)
 );
