@@ -49,6 +49,7 @@ const corsOptions = {
 };
 
 const app = express();
+app.get("/", (req, res) => res.send("Hello World!"));
 server.applyMiddleware({ app });
 
 // app.use(cors(corsOptions));
