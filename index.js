@@ -49,7 +49,6 @@ const corsOptions = {
 };
 
 const app = express();
-app.get("/", (req, res) => res.send("Hello World! " + server.graphqlPath));
 server.applyMiddleware({ app });
 
 // app.use(cors(corsOptions));
@@ -57,3 +56,5 @@ server.applyMiddleware({ app });
 app.listen({ port: 4000 }, () =>
   console.log(`🚀  Server ready at http://localhost:4000${server.graphqlPath}`)
 );
+
+module.exports = app;
