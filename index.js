@@ -1,6 +1,7 @@
-const express = require("express");
+// const express = require("express");
 // const cors = require("cors");
-const { ApolloServer, gql } = require("apollo-server-express");
+// const { ApolloServer, gql } = require("apollo-server-express");
+const { ApolloServer, gql } = require("apollo-server");
 require("./config");
 
 const { Question } = require("./models");
@@ -48,15 +49,11 @@ const corsOptions = {
   credentials: true
 };
 
-const app = express();
-server.applyMiddleware({ app });
+// const app = express();
+// server.applyMiddleware({ app });
 
 // app.use(cors(corsOptions));
 
-app.listen({ port: process.env.port }, () =>
-  console.log(
-    `🚀  Server ready at http://localhost:${process.env.port}${server.graphqlPath}`
-  )
-);
-
-module.exports = app;
+server.listen().then(({ url }) => {
+  console.log(`🚀  Server ready at ${url}`);
+});
