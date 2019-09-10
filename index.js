@@ -49,7 +49,7 @@ const corsOptions = {
 };
 
 const app = express();
-server.applyMiddleware({ app });
+server.applyMiddleware({ app, cors: false });
 
 app.use(cors(corsOptions));
 
