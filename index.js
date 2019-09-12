@@ -1,6 +1,3 @@
-// const express = require("express");
-// const cors = require("cors");
-// const { ApolloServer, gql } = require("apollo-server-express");
 const { ApolloServer, gql } = require("apollo-server");
 require("./config");
 
@@ -44,15 +41,6 @@ const server = new ApolloServer({
   introspection: true,
   playground: true
 });
-const corsOptions = {
-  origin: "https://now-mongo-answers.lollymay.now.sh/",
-  credentials: true
-};
-
-// const app = express();
-// server.applyMiddleware({ app });
-
-// app.use(cors(corsOptions));
 
 server.listen().then(({ url }) => {
   console.log(`🚀  Server ready at ${url}`);

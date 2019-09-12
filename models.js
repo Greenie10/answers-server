@@ -11,12 +11,3 @@ const Question = mongoose.model("question", questionSchema);
 module.exports = {
   Question
 };
-// const gardenerSchema = new Schema({
-//   name: String
-// });
-
-// const Gardener = mongoose.model("gardener", gardenerSchema);
-
-// module.exports = {
-//   Gardener
-// };
