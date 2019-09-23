@@ -8,10 +8,18 @@ const typeDefs = gql`
     id: ID!
     Question: String
     Location: String
+    Zone: String
+    Date: String
+    Answers: [Answer]
   }
 
   type Query {
     getQuestions: [Question]
+  }
+
+  type Answer {
+    Gardener: String
+    AnAnswer: String
   }
 
   type Mutation {
