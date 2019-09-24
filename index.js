@@ -14,7 +14,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    getQuestions: [Question]
+    getQuestions(date: String): [Question]
   }
 
   type Answer {
@@ -29,7 +29,7 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    getQuestions: async () => await Question.find({}).exec()
+    getQuestions: async (_, { date }) => await Question.find({ Date: date })
   },
   Mutation: {
     addQuestion: async (_, args) => {
