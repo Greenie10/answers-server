@@ -14,7 +14,9 @@ const typeDefs = gql`
   }
 
   type Query {
-    getQuestions(date: String): [Question]
+    # getQuestions(date: String): [Question]
+    getQuestions: [Question]
+    getZones(zone: String): [Question]
   }
 
   type Answer {
@@ -29,7 +31,10 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    getQuestions: async (_, { date }) => await Question.find({ Date: date })
+    // getQuestions: async (_, { date }) =>
+    //   await Question.find({ Date: date }).exec(),
+    getQuestions: async () => await Question.find({}).exec(),
+    getZones: async (_, { zone }) => await Question.find({ Zone: zone }).exec()
   },
   Mutation: {
     addQuestion: async (_, args) => {
