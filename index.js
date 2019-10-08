@@ -19,13 +19,24 @@ const typeDefs = gql`
     getZones(zone: String): [Question]
   }
 
+  input InputAnswer {
+    Gardener: String
+    AnAnswer: String
+  }
+
   type Answer {
     Gardener: String
     AnAnswer: String
   }
 
   type Mutation {
-    addQuestion(Question: String!, Location: String!): Question
+    addQuestion(
+      Question: String!
+      Location: String!
+      Zone: String!
+      Date: String!
+      Answers: [InputAnswer]
+    ): Question
   }
 `;
 
