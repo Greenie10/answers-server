@@ -5,7 +5,7 @@ const { Question } = require("./models");
 
 const typeDefs = gql`
   type Question {
-    id: ID!
+    _id: ID!
     Question: String
     Location: String
     Zone: String
@@ -14,9 +14,9 @@ const typeDefs = gql`
   }
 
   type Query {
-    # getQuestions(date: String): [Question]
     getQuestions: [Question]
     getZones(zone: String): [Question]
+    getQuestion(id: String): [Question]
   }
 
   input InputAnswer {
@@ -42,10 +42,9 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    // getQuestions: async (_, { date }) =>
-    //   await Question.find({ Date: date }).exec(),
     getQuestions: async () => await Question.find({}).exec(),
-    getZones: async (_, { zone }) => await Question.find({ Zone: zone }).exec()
+    getZones: async (_, { zone }) => await Question.find({ Zone: zone }).exec(),
+    getQuestion: async (_, { id }) => await Question.find({ _id: id }).exec()
   },
   Mutation: {
     addQuestion: async (_, args) => {
