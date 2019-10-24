@@ -1,11 +1,15 @@
 const { ApolloServer, gql } = require("apollo-server");
 require("./config");
 
-const { Question } = require("./models");
+const { QuestionModel } = require("./models");
 
 const typeDefs = gql`
+  input InputAnswer {
+    Gardener: String
+    AnAnswer: String
+  }
+
   type Question {
-    _id: ID!
     Question: String
     Location: String
     Zone: String
@@ -13,20 +17,15 @@ const typeDefs = gql`
     Answers: [Answer]
   }
 
-  type Query {
-    getQuestions: [Question]
-    getZones(zone: String): [Question]
-    getQuestion(id: String): [Question]
-  }
-
-  input InputAnswer {
-    Gardener: String
-    AnAnswer: String
-  }
-
   type Answer {
     Gardener: String
     AnAnswer: String
+  }
+
+  type Query {
+    getQuestions: [Question]
+    getZones(zone: String): [Question]
+    getQuestion(id: ID!): Question
   }
 
   type Mutation {
@@ -37,24 +36,35 @@ const typeDefs = gql`
       Date: String!
       Answers: [InputAnswer]
     ): Question
+    updateQuestion(
+      id: ID!
+      Question: String
+      Location: String
+      Zone: String
+      Date: String
+      Answers: [InputAnswer]
+    ): Question
   }
 `;
 
 const resolvers = {
   Query: {
-    getQuestions: async () => await Question.find({}).exec(),
-    getZones: async (_, { zone }) => await Question.find({ Zone: zone }).exec(),
-    getQuestion: async (_, { id }) => await Question.find({ _id: id }).exec()
+    getQuestions: async () => await QuestionModel.find({}).exec(),
+    getZones: async (_, { zone }) =>
+      await QuestionModel.find({ Zone: zone }).exec(),
+    getQuestion: async (_, { id }) => await QuestionModel.findById(id).exec()
   },
   Mutation: {
     addQuestion: async (_, args) => {
       try {
-        let response = await Question.create(args);
+        let response = await QuestionModel.create(args);
         return response;
       } catch (e) {
         return e.message;
       }
-    }
+    },
+    updateQuestion: async (_, { ...args }) =>
+      await QuestionModel.findByIdAndUpdate(args.id, args)
   }
 };
 

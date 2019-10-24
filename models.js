@@ -9,8 +9,8 @@ const questionSchema = new Schema({
   Answers: [{ Gardener: String, AnAnswer: String }]
 });
 
-const Question = mongoose.model("question", questionSchema);
+const QuestionModel = mongoose.model("question", questionSchema);
 
 module.exports = {
-  Question
+  QuestionModel
 };
