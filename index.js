@@ -45,7 +45,7 @@ const typeDefs = gql`
       Date: String
       Answers: [InputAnswer]
     ): Question
-    insertAnswer(id: ID!, Answers: [InputAnswer]): Question
+    insertAnswer(id: ID!, Answers: InputAnswer): Question
   }
 `;
 
@@ -69,8 +69,13 @@ const resolvers = {
     updateQuestion: async (_, { ...args }) =>
       await QuestionModel.findByIdAndUpdate(args.id, args),
     // inserts values
-    insertAnswer: async (_, { ...args }) =>
-      await QuestionModel.findByIdAndUpdate(args.id, { $push: args })
+    insertAnswer: async (_, { ...args }) => {
+      return await QuestionModel.findByIdAndUpdate(
+        args.id,
+        { $push: args },
+        { new: true }
+      );
+    }
   }
 };
 
