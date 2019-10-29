@@ -10,6 +10,7 @@ const typeDefs = gql`
   }
 
   type Question {
+    id: ID
     Question: String
     Location: String
     Zone: String
@@ -44,6 +45,7 @@ const typeDefs = gql`
       Date: String
       Answers: [InputAnswer]
     ): Question
+    insertAnswer(id: ID!, Answers: [InputAnswer]): Question
   }
 `;
 
@@ -63,8 +65,12 @@ const resolvers = {
         return e.message;
       }
     },
+    // replaces values
     updateQuestion: async (_, { ...args }) =>
-      await QuestionModel.findByIdAndUpdate(args.id, args)
+      await QuestionModel.findByIdAndUpdate(args.id, args),
+    // inserts values
+    insertAnswer: async (_, { ...args }) =>
+      await QuestionModel.findByIdAndUpdate(args.id, { $push: args })
   }
 };
 
