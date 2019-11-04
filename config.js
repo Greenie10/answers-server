@@ -7,7 +7,8 @@ console.log("*****: url", url);
 
 mongoose.connect(process.env.MONGODB_GQT, {
   useNewUrlParser: true,
-  useFindAndModify: false
+  useFindAndModify: false,
+  useUnifiedTopology: true
 });
 mongoose.connection.once("open", () =>
   console.log(`Connected to mongo at ${url}`)
