@@ -1,4 +1,6 @@
-export default questionSchema = new Schema({
+const { Schema } = require("mongoose");
+
+module.exports = new Schema({
   Question: String,
   Location: String,
   Zone: String,

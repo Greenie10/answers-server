@@ -1,9 +1,10 @@
-const { Schema } = mongoose;
+const { Schema } = require("mongoose");
+
 const bcrypt = require("bcrypt");
 
 const saltRounds = 13;
 
-export default userSchema = new Schema({
+const userSchema = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true }
 });
@@ -23,3 +24,5 @@ userSchema.pre("save", function(next) {
     next();
   }
 });
+
+module.exports = userSchema;
